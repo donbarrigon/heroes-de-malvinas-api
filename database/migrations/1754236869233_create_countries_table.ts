@@ -8,8 +8,8 @@ export default class extends BaseSchema {
       table.increments('id')
 
       table.string('name').notNullable()
-      table.string('iso3').notNullable().unique()
-      table.string('iso2').notNullable().unique()
+      table.string('iso_3').notNullable().unique()
+      table.string('iso_2').notNullable().unique()
       table.string('numeric_code').nullable()
       table.string('phonecode').nullable()
       table.string('capital').nullable()
@@ -30,7 +30,7 @@ export default class extends BaseSchema {
       table.decimal('longitude', 11, 8).nullable()
 
       table.string('emoji').nullable()
-      table.string('emojiU').nullable()
+      table.string('emoji_u').nullable()
 
       table.jsonb('timezones').nullable()
       table.jsonb('translations').nullable()

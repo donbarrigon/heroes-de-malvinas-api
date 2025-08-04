@@ -12,7 +12,7 @@ export default class extends BaseSchema {
       table.string('country_code')
       table.string('country_name')
 
-      table.string('iso2')
+      table.string('iso_2')
       table.string('fips_code').nullable()
       table.string('type').nullable()
       table.string('level').nullable()

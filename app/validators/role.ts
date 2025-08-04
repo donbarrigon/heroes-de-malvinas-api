@@ -2,16 +2,16 @@ import vine from '@vinejs/vine'
 
 /**
  * Validator to validate the payload when creating
- * a new user.
+ * a new role.
  */
-export const createUserValidator = vine.compile(
+export const createRoleValidator = vine.compile(
   vine.object({})
 )
 
 /**
  * Validator to validate the payload when updating
- * an existing user.
+ * an existing role.
  */
-export const updateUserValidator = vine.compile(
+export const updateRoleValidator = vine.compile(
   vine.object({})
 )
