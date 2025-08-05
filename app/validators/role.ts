@@ -5,7 +5,14 @@ import vine from '@vinejs/vine'
  * a new role.
  */
 export const createRoleValidator = vine.compile(
-  vine.object({})
+  vine.object({
+    name: vine.string()
+      .trim()
+      .toLowerCase()
+      .minLength(1)
+      .maxLength(255)
+      .regex(/^[a-z0-9\s]+$/)
+  })
 )
 
 /**
@@ -13,5 +20,12 @@ export const createRoleValidator = vine.compile(
  * an existing role.
  */
 export const updateRoleValidator = vine.compile(
-  vine.object({})
+  vine.object({
+    name: vine.string()
+      .trim()
+      .toLowerCase()
+      .minLength(1)
+      .maxLength(255)
+      .regex(/^[a-z0-9\s]+$/)
+  })
 )

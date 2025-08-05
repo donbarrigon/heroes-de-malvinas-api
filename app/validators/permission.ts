@@ -5,7 +5,14 @@ import vine from '@vinejs/vine'
  * a new permission.
  */
 export const createPermissionValidator = vine.compile(
-  vine.object({})
+  vine.object({
+    name: vine.string()
+      .trim()
+      .toLowerCase()
+      .minLength(5)
+      .maxLength(255)
+      .regex(/^[a-z][a-z0-9\-_]*(?:\s[a-z0-9\-_]+)*[a-z0-9]$/)
+  })
 )
 
 /**
@@ -13,5 +20,12 @@ export const createPermissionValidator = vine.compile(
  * an existing permission.
  */
 export const updatePermissionValidator = vine.compile(
-  vine.object({})
+  vine.object({
+    name: vine.string()
+      .trim()
+      .toLowerCase()
+      .minLength(5)
+      .maxLength(255)
+      .regex(/^[a-z][a-z0-9\-_]*(?:\s[a-z0-9\-_]+)*[a-z0-9]$/)
+  })
 )
