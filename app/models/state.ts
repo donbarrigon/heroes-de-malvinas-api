@@ -48,7 +48,7 @@ export default class State extends BaseModel {
   declare updatedAt: DateTime
 
   @column.dateTime()
-  declare deletedAt?: DateTime
+  declare deletedAt?: DateTime | null
 
   @hasMany(() => City)
   declare cities: HasMany<typeof City>
