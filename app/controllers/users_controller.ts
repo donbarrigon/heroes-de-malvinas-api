@@ -6,15 +6,7 @@ import { errors } from '@adonisjs/lucid'
 import Database from '@adonisjs/lucid/services/db'
 
 export default class UsersController {
-  /**
-   * Display a list of resource
-   */
-  async index({}: HttpContext) {}
 
-  /**
-   * Handle form submission for the create action
-   * funcion para registrar el usuario
-   */
   async store({ request, response }: HttpContext) {
     const payload = await request.validateUsing(createUserValidator)
 
@@ -69,7 +61,7 @@ export default class UsersController {
 
       return response.status(500).json({
         message: 'Error al registrar usuario',
-        errors: error.message
+        errors: error.messages || error.message || String(error)
       })
     }
   }
@@ -94,7 +86,7 @@ export default class UsersController {
 
       return response.status(500).json({
         message: 'No se actualizó el perfil',
-        errors: error.message,
+        errors: error.messages || error.message || String(error)
       })
     }
   }
@@ -114,24 +106,24 @@ export default class UsersController {
     }catch (error) {
       return response.status(500).json({
         message: 'No se actualizó el correo',
-        errors: error.message,
+        errors: error.messages || error.message || String(error)
       })
     }
   }
 
   async updatePassword({ auth, request, response }: HttpContext) {
     try {
-      const authUser = await auth.use('api').authenticate()
+      const user = await auth.use('api').authenticate()
       const payload = await request.validateUsing(updateUserPasswordValidator)
 
-      authUser.password = payload.password
-      await authUser.save()
+      user.password = payload.password
+      await user.save()
 
       return response.status(204)
     }catch (error) {
       return response.status(500).json({
         message: 'No se actualizó la contraseña',
-        errors: error.message,
+        errors: error.messages || error.message || String(error)
       })
     }
   }

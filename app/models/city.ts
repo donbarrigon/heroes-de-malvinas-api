@@ -4,6 +4,7 @@ import State from './state.js'
 import type { BelongsTo } from '@adonisjs/lucid/types/relations'
 import Country from './country.js'
 
+
 export default class City extends BaseModel {
   @column({ isPrimary: true })
   declare id: number
