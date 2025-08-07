@@ -9,12 +9,12 @@ export default class extends BaseSchema {
       table.string('name').notNullable()
 
       table.integer('state_id').unsigned().references('id').inTable('states').onDelete('CASCADE')
-      table.string('state_code')
-      table.string('state_name')
+      table.string('state_code').nullable()
+      table.string('state_name').nullable()
 
       table.integer('country_id').unsigned().references('id').inTable('countries').onDelete('CASCADE')
-      table.string('country_code')
-      table.string('country_name')
+      table.string('country_code').nullable()
+      table.string('country_name').nullable()
 
       table.decimal('latitude', 10, 8).nullable()
       table.decimal('longitude', 11, 8).nullable()

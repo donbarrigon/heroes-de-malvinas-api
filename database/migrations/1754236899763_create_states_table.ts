@@ -6,11 +6,11 @@ export default class extends BaseSchema {
   async up() {
     this.schema.createTable(this.tableName, (table) => {
       table.integer('id').primary()
-      table.string('name')
+      table.string('name').notNullable()
 
       table.integer('country_id').unsigned().notNullable().references('id').inTable('countries').onDelete('CASCADE')
-      table.string('country_code')
-      table.string('country_name')
+      table.string('country_code').nullable()
+      table.string('country_name').nullable()
 
       table.string('iso_2')
       table.string('fips_code').nullable()

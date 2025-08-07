@@ -16,28 +16,28 @@ export default class City extends BaseModel {
   declare stateId: number
 
   @column()
-  declare stateCode: string
+  declare stateCode: string | null
 
   @column()
-  declare stateName: string
+  declare stateName: string | null
 
   @column()
   declare countryId: number
 
   @column()
-  declare countryCode: string
+  declare countryCode: string | null
 
   @column()
-  declare countryName: string
+  declare countryName: string | null
 
   @column()
-  declare latitude?: number
+  declare latitude?: number | null
 
   @column()
-  declare longitude?: number
+  declare longitude?: number | null
 
   @column()
-  declare wikiDataId?: string
+  declare wikiDataId?: string | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
@@ -46,7 +46,7 @@ export default class City extends BaseModel {
   declare updatedAt: DateTime
 
   @column.dateTime()
-  declare deletedAt?: DateTime
+  declare deletedAt?: DateTime | null
 
   @belongsTo(() => State)
   declare state: BelongsTo<typeof State>

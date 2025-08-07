@@ -35,15 +35,15 @@ export default class MailService {
     return false
   }
 
-  static async sendNotification(email: string, subject: string, content: string) {
-    await mail.use('smtp').send((message) => {
-      message
-        .from(MailService.fromAddress, MailService.fromName)
-        .to(email)
-        .subject(subject)
-        .html(`
-          <p>${content}</p>
-        `)
-    })
-  }
+    static async sendNotification(email: string, subject: string, content: string) {
+        await mail.use('smtp').send((message) => {
+            message
+                .from(MailService.fromAddress, MailService.fromName)
+                .to(email)
+                .subject(subject)
+                .html(`
+                <p>${content}</p>
+                `)
+        })
+    }
 }

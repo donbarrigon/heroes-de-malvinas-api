@@ -15,31 +15,31 @@ export default class State extends BaseModel {
   declare countryId: number
 
   @column()
-  declare countryCode: string
+  declare countryCode: string | null
 
   @column()
-  declare countryName: string
+  declare countryName: string | null
 
   @column()
-  declare iso2: string
+  declare iso2: string | null
 
   @column()
-  declare fipsCode?: string
+  declare fipsCode?: string | null
 
   @column()
-  declare type?: string
+  declare type?: string | null
 
   @column()
-  public level?: string
+  public level?: string | null
 
   @column()
-  declare parentId?: number
+  declare parentId?: number | null
 
   @column()
-  declare latitude?: number
+  declare latitude?: number | null
 
   @column()
-  declare longitude?: number
+  declare longitude?: number | null
 
   @column.dateTime({ autoCreate: true })
   declare createdAt: DateTime
