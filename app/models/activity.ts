@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon'
 import { BaseModel, column } from '@adonisjs/lucid/orm'
 import User from './user.js'
+import logger from '@adonisjs/core/services/logger'
 
 export default class Activity extends BaseModel {
     @column({ isPrimary: true })
@@ -34,17 +35,18 @@ export default class Activity extends BaseModel {
     static readonly LOGOUT = 'logout'
 
     // funcion para guardar el historial
-    static async record(user: User, model: InstanceType<typeof BaseModel>, action: string): Promise<void> {
+    static async record(user: User, model: InstanceType<typeof BaseModel>, action: string, changes?: Record<string, any>): Promise<void> {
         try{
+            //const changes = Object.keys(model.$dirty).length > 0 ? model.$dirty : model
             await this.create({
                 userId: user.id,
                 model: model.constructor.name,
                 modelId: Number(model.$primaryKeyValue),
-                action,
-                changes: model.$dirty ?? null,
+                action: action,
+                changes: changes ?? model,
             })
         } catch (error) {
-            console.log("error al guardar el record del historial", error)
+            logger.error({ message: "error al guardar el record del historial", error: error})
         }
     }
 }

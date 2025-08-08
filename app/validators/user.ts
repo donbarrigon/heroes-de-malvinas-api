@@ -73,11 +73,11 @@ export const updateUserProfileValidator = vine.compile(
       .toLowerCase()
       .minLength(3)
       .maxLength(255)
-      .regex(/^[a-z][a-z0-9\-_]*(?:\s[a-z0-9\-_]+)*[a-z0-9]$/)
-      .unique(async (db, value) => {
-        const profile = await db.from('profiles').where('nickname', value).first()
-        return !profile
-      }),
+      .regex(/^[a-z][a-z0-9\-_]*(?:\s[a-z0-9\-_]+)*[a-z0-9]$/),
+    //   .unique(async (db, value) => {
+    //     const profile = await db.from('profiles').where('nickname', value).first()
+    //     return !profile
+    //   }),
 
     full_name: vine.string()
       .trim()

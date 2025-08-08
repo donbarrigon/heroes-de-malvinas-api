@@ -8,10 +8,14 @@ export default class UserPolicy extends BasePolicy {
     }
 
     async update(authUser: User, user: User): Promise<AuthorizerResponse> {
-        return authUser.id === user.id || user.can('update user')
+        return authUser.id === user.id || authUser.can('update user')
     }
 
     async updateEmail(user: User): Promise<AuthorizerResponse> {
+        return user.id === user.id || user.can('update user')
+    }
+
+    async resetPassword(user: User): Promise<AuthorizerResponse> {
         return user.can('update user')
     }
 

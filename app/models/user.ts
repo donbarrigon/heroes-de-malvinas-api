@@ -111,23 +111,4 @@ export default class User extends compose(BaseModel, AuthFinder) {
             expiresAt: DateTime.now().plus({ hours: 1 }),
         })
     }
-
-    async sendVerificationEmail(): Promise<void> {
-        try {
-            const token = await this.createToken('verification')
-            MailService.sendConfirmationEmail(this.email, token.token)
-        } catch (error) {
-            logger.error({ message: 'Error al enviar el correo de verificación:', data: this, error })
-        }
-    }
-
-    async sendUpdatePasswordEmail(): Promise<void> {
-        try {
-            MailService.sendNotification(this.email,
-                'Actualización de contraseña',
-                'Parse su contraseña fue cambiada, si no fue usted hablele al jefe del clan')
-        } catch (error) {
-            logger.error({ message: 'Error al enviar notificacion por correo:', data: this, error })
-        }
-    }
 }

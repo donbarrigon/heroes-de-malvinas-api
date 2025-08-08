@@ -9,23 +9,28 @@
 
 import router from '@adonisjs/core/services/router'
 import { middleware } from './kernel.js'
+const UsersController = () => import('#controllers/users_controller')
 
 router.get('/', async () => {
   return {
-    hello: 'world',
+    hello: 'home de heroes de malvinas',
   }
 })
 router.group(() => {
-  // Rutas públicas (sin auth)
-  router.post('users', 'UsersController.store')
-  router.post('users/login', 'UsersController.login')
-  router.post('users/logout', 'UsersController.logout')
+    // Rutas públicas (sin auth)
+    router.post('users', [UsersController, 'store']) // registarse
+    router.post('users/login', [UsersController, 'login'])
 
-  // Rutas protegidas (con auth)
-  router.group(() => {
-    router.put('users/:id', 'UsersController.update')
-    router.delete('users/:id', 'UsersController.destroy')
-    router.patch('users/:id/restore', 'UsersController.restore')
-  }).use(middleware.auth())
+
+    // Rutas protegidas (con auth)
+    router.group(() => {
+        router.put('users/:id', [UsersController, 'updateProfile'])
+        router.patch('users/:id/email', [UsersController, 'updateEmail'])
+        router.patch('users/:id/password', [UsersController, 'updatePassword'])
+        router.patch('users/:id/reset-password', [UsersController, 'resetPassword'])
+        router.delete('users/:id', [UsersController, 'destroy'])
+        router.patch('users/:id/restore', [UsersController, 'restore'])
+        router.post('users/logout', [UsersController, 'logout'])
+    }).use(middleware.auth())
 
 }).prefix('/api')
