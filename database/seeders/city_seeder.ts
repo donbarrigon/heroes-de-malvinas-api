@@ -7,43 +7,44 @@ import { readFile } from 'fs/promises'
 export default class extends BaseSeeder {
 
     async run() {
+        return
         console.log('Seeding cities, estates and countries...')
         let i = 0
         try {
-        const fileContent = await readFile('./database/json/countries.json', 'utf-8')
-        const countries = JSON.parse(fileContent)
+            const fileContent = await readFile('./database/json/countries.json', 'utf-8')
+            const countries = JSON.parse(fileContent)
 
-        for (const country of countries) {
-            country.latitude = parseFloat(country.latitude)
-            country.longitude = parseFloat(country.longitude)
-            country.timezones = JSON.stringify(country.timezones)
-            country.translations = JSON.stringify(country.translations)
+            for (const country of countries) {
+                country.latitude = parseFloat(country.latitude)
+                country.longitude = parseFloat(country.longitude)
+                country.timezones = JSON.stringify(country.timezones)
+                country.translations = JSON.stringify(country.translations)
 
-            const model = await Country.create(country)
-            if (!model) {
-                console.error('Error al crear el país:', country.name);
+                const model = await Country.create(country)
+                if (!model) {
+                    console.error('Error al crear el país:', country.name);
+                }
+                i++
             }
-            i++
-        }
             console.log(`Se insertaron ${i} países`)
         } catch (error) {
             console.error('Error al leer el archivo countries.json:', error)
         }
 
         try {
-        i = 0
-        const fileContent = await readFile('./database/json/states.json', 'utf-8')
-        const states = JSON.parse(fileContent)
-        for (const state of states) {
-            state.latitude = parseFloat(state.latitude)
-            state.longitude = parseFloat(state.longitude)
-            const model = await State.create(state)
-            if (!model) {
-                console.error('Error al crear el estado:[', state.id, '] ', state.name);
+            i = 0
+            const fileContent = await readFile('./database/json/states.json', 'utf-8')
+            const states = JSON.parse(fileContent)
+            for (const state of states) {
+                state.latitude = parseFloat(state.latitude)
+                state.longitude = parseFloat(state.longitude)
+                const model = await State.create(state)
+                if (!model) {
+                    console.error('Error al crear el estado:[', state.id, '] ', state.name);
+                }
+                i++
             }
-            i++
-        }
-        console.log(`Se insertaron ${i} estados`)
+            console.log(`Se insertaron ${i} estados`)
         }
         catch (error) {
             console.error('Error al leer el archivo states.json:', error)
@@ -72,8 +73,8 @@ export default class extends BaseSeeder {
                 return
             }
         }
-        console.log(`Se insertaron ${i} ciudades en total`)
-        return
+            console.log(`Se insertaron ${i} ciudades en total`)
+            return
         } catch (error) {
             console.error('Error al leer el archivo cities.json:', error)
         }
